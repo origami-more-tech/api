@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    image: tcaty/more-tech-api
+    container_name: api
+    restart: always
+    networks:
+      - more-tech
+
+  nginx:
+    build: ./nginx
+    image: tcaty/more-tech-nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+    restart: always
+    depends_on:
+      - api
+    networks:
+      - more-tech
+
+networks:
+  more-tech:
+    driver: bridge
