@@ -2,21 +2,14 @@ import asyncio
 import logging
 import sys
 import handlers
-from loader import bot, scheduler, dp, firestore
-from config import Collection
+from loader import bot, scheduler, dp
 
 
-async def ping():
-    chats = await firestore.get_all(collection=Collection.Chat)
-    for chat in chats:
-        await bot.send_message(chat_id=chat["id"], text="ping")
+async def on_startup():
+    scheduler.start()
 
 
-def on_startup():
-    scheduler.add_job(ping, "interval", seconds=10)
-
-
-def on_shutdown():
+async def on_shutdown():
     scheduler.shutdown()
 
 
