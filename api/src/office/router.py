@@ -15,4 +15,4 @@ async def get_all_offices(offset: int = 0, limit: int = 0) -> List[Office]:
     with open("offices.json") as json_file:
         offices = json.load(json_file)[offset : (offset + limit) if limit > 0 else None]
         offices = [Office(**item) for item in offices]
-        return offices
+        return list(sorted(offices, key=lambda office: office.distance))

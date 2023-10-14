@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from todo.router import router as todo_router
 from user.router import router as user_router
 from office.router import router as office_router
 from atm.router import router as atm_router
@@ -22,7 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(todo_router, prefix="/todo")
 app.include_router(user_router, prefix="/user")
 app.include_router(office_router, prefix="/office")
 app.include_router(atm_router, prefix="/atm")
