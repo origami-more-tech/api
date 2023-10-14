@@ -1,6 +1,5 @@
-from uuid import uuid4
-from pydantic import BaseModel, Field
-from typing import Union, List
+from pydantic import BaseModel
+from typing import List
 
 
 class OpenHours(BaseModel):
@@ -9,7 +8,7 @@ class OpenHours(BaseModel):
 
 
 class Office(BaseModel):
-    id: str = Field(default=str(uuid4()))
+    id: str
     salePointName: str
     address: str
     rko: str | None
