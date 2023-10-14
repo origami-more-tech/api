@@ -17,11 +17,11 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
           
-      - name: Create 
+      - name: Create firebase secrets in bot/ 
         id: create-json
         uses: jsdaniell/create-json@1.1.2
         with:
-          dir: "api/"
+          dir: "bot/"
           name: "firebase-secrets.json"
           json: ${{ secrets.FIREBASE_SECRETS_JSON }}
           
