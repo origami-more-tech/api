@@ -7,6 +7,7 @@ on:
 env:
   DOCKER_REMOTE_CONTEXT: production
   DOCKER_IMAGE_API: tcaty/more-tech-api
+  DOCKER_IMAGE_BOT: tcaty/more-tech-bot
   DOCKER_IMAGE_NGINX: tcaty/more-tech-nginx
 
 jobs:
@@ -26,6 +27,8 @@ jobs:
           
       - name: Build docker images
         run: docker-compose -f docker-compose.yaml build
+        env: 
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
 
       - name: Login to Dockerhub
         uses: docker/login-action@v2
@@ -37,6 +40,7 @@ jobs:
         run: |
           docker push ${{ env.DOCKER_IMAGE_API }}
           docker push ${{ env.DOCKER_IMAGE_NGINX }}
+          docker push ${{ env.DOCKER_IMAGE_BOT }}
 
       - name: Create remote docker context
         uses: arwynfr/actions-docker-context@v2
@@ -53,6 +57,7 @@ jobs:
         run: |
           docker pull ${{ env.DOCKER_IMAGE_API }}
           docker pull ${{ env.DOCKER_IMAGE_NGINX }}
+          docker pull ${{ env.DOCKER_IMAGE_BOT }}
             
       - name: Down containers on remote
         run: docker-compose --context ${{ env.DOCKER_REMOTE_CONTEXT }} down
