@@ -24,3 +24,6 @@ class Office(BaseModel):
     myBranch: bool
     openHours: List[OpenHours]
     openHoursIndividual: List[OpenHours]
+    people: int
+    windows: int
+    workload_type: int | None
