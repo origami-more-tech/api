@@ -1,4 +1,3 @@
-from fastapi import HTTPException
 from firebase_admin import firestore_async
 from google.cloud.firestore_v1.async_document import AsyncDocumentReference
 from typing import Dict, Any, List
@@ -42,12 +41,9 @@ class Firestore:
     async def __get_doc_safely(self, ref: AsyncDocumentReference) -> Dict[str, Any]:
         doc = await ref.get()
         if not doc.exists:
-            raise HTTPException(status_code=404, detail=f"Item doesn't exists")
+            raise Exception("Document not found!")
         return doc.to_dict()  # type: ignore
 
     def __get_ref(self, id: str, collection: str) -> AsyncDocumentReference:
         ref = self.firestore.collection(collection).document(id)
         return ref
-
-
-firestore = Firestore()

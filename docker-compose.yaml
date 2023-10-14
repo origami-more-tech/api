@@ -9,6 +9,14 @@ services:
     networks:
       - more-tech
 
+  bot:
+    build: ./bot
+    image: tcaty/more-tech-bot
+    container_name: bot
+    restart: always
+    environment:
+      BOT_TOKEN: $BOT_TOKEN
+
   nginx:
     build: ./nginx
     image: tcaty/more-tech-nginx
