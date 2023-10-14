@@ -4,14 +4,15 @@ from typing import List
 
 
 class Service(BaseModel):
+    name: str
     serviceCapability: str | None
     serviceActivity: str | None
 
 
-class Atms(BaseModel):
-    id: str = Field(default=str(uuid4()))
+class Atm(BaseModel):
+    id: str
     address: str
-    latitude: str
-    longitude: str
-    allDay: str
-    openHoursIndividual: List[Service]
+    latitude: float
+    longitude: float
+    allDay: bool
+    services: List[Service]
