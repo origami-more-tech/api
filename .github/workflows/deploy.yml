@@ -64,3 +64,5 @@ jobs:
           
       - name: Up new containers on remote
         run: docker-compose --context ${{ env.DOCKER_REMOTE_CONTEXT }} up -d --force-recreate
+        env: 
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
