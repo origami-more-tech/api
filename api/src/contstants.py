@@ -5,3 +5,4 @@ class Collection(str, Enum):
     user = "user"
     office = "office"
     atms = "atms"
+    calc = "calc"

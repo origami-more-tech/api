@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from user.router import router as user_router
 from office.router import router as office_router
 from atm.router import router as atm_router
+from calculator.router import router as calc_router
 from fastapi.middleware.cors import CORSMiddleware
 
 # To run project run commands below from api/ dir
@@ -24,3 +25,4 @@ app.add_middleware(
 app.include_router(user_router, prefix="/user")
 app.include_router(office_router, prefix="/office")
 app.include_router(atm_router, prefix="/atm")
+app.include_router(calc_router, prefix="/calc")
