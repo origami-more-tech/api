@@ -1,4 +1,4 @@
-FROM python:3.10.12-alpine
+FROM python:3.10.12
 
 WORKDIR /usr/app
 ENV PYTHONPATH=/usr/app/src
