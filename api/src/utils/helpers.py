@@ -15,9 +15,12 @@ def write_models_to_json(file: str, models):
 
 def rank(offices: List[dict]) -> List[dict]:
     offices_df = pd.DataFrame(offices)
+    offices_df = offices_df[offices_df['distance'] < 10000]
+    median_distance = offices_df['distance'].median()
+    offices_df['normal_distance'] = offices_df['distance'] / median_distance
     offices_df["workload"] = offices_df["people"] / offices_df["windows"]
     offices_df = offices_df.sort_values(
-        ["distance", "workload"], ascending=[True, True]
+        ["normal_distance", "workload"], ascending=[True, True]
     )
     offices_df.loc[
         (0 <= offices_df["workload"]) & (offices_df["workload"] <= 2), "workload_type"
