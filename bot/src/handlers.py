@@ -16,9 +16,8 @@ async def command_start_handler(message: Message) -> None:
     builder.add(types.InlineKeyboardButton(text="Карта", callback_data="карта"))
     builder.add(types.InlineKeyboardButton(text="Кредит", callback_data="кредит"))
     builder.add(types.InlineKeyboardButton(text="Бизнес", callback_data="бизнес"))
-    builder.add(types.InlineKeyboardButton(text="Налоги", callback_data="налоги"))
     builder.add(types.InlineKeyboardButton(text="Пенсия", callback_data="пенсия"))
-    builder.adjust(3, 2)
+    builder.adjust(2, 2)
     await message.answer(
         "Выберите интересующую Вас категорию", reply_markup=builder.as_markup()
     )
