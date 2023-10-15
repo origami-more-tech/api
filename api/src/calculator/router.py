@@ -36,10 +36,10 @@ async def calculations_credit(calcDTO: CalcDTO) -> Calc:
         office = Office(**offices[0])
 
     return Calc(
-        monthlyPayment=monthly_payment,
-        sumCreditFull=sumFinaly,
-        sumPayment=monthly_payment,
-        overpayment=overPayment,
+        monthlyPayment=round(monthly_payment, 2),
+        sumCreditFull=round(sumFinaly, 2),
+        sumPayment=round(monthly_payment, 2),
+        overpayment=round(overPayment, 2),
         dateAtLast=dateLastPayment,
         office=office,
     )
