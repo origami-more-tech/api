@@ -5,27 +5,11 @@ from contstants import Collection
 from office.model import Office
 from typing import List, Dict
 from fastapi.exceptions import HTTPException
+from utils.helpers import rank
 
 
 router = APIRouter()
 router.tags = [Collection.office]
-
-
-def rank(offices: List[dict]) -> List[dict]:
-    offices_df = pd.DataFrame(offices)
-    offices_df["workload"] = offices_df["people"] / offices_df["windows"]
-    offices_df = offices_df.sort_values(
-        ["distance", "workload"], ascending=[True, True]
-    )
-    offices_df.loc[
-        (0 <= offices_df["workload"]) & (offices_df["workload"] <= 2), "workload_type"
-    ] = 0
-    offices_df.loc[
-        (2 < offices_df["workload"]) & (offices_df["workload"] <= 3.5), "workload_type"
-    ] = 1
-    offices_df.loc[3.5 < offices_df["workload"], "workload_type"] = 2
-    offices = offices_df.to_dict(orient="records")
-    return offices
 
 
 @router.get("/all")
